@@ -1,3 +1,0 @@
-D:/armProject/stm32_proj/build_host/CMakeFiles/host_test.dir
-D:/armProject/stm32_proj/build_host/CMakeFiles/edit_cache.dir
-D:/armProject/stm32_proj/build_host/CMakeFiles/rebuild_cache.dir
