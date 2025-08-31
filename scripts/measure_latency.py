@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+ #!/usr/bin/env python3
 """
 Latency measurement script placeholder.
 Will be used to process oscilloscope data and generate latency plots.
