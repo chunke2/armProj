@@ -1,0 +1,3 @@
+D:/armProject/stm32_proj/build_arm/CMakeFiles/stm32_proj.dir
+D:/armProject/stm32_proj/build_arm/CMakeFiles/edit_cache.dir
+D:/armProject/stm32_proj/build_arm/CMakeFiles/rebuild_cache.dir

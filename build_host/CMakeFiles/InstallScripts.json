@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"D:/armProject/stm32_proj/build_host/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
