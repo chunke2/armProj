@@ -1,2 +1,2 @@
 #include <stdio.h>
-int main(void){ printf("OK\n"); return 0; }
+int main(void){ printf("OKK\n"); return 0; }
