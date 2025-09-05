@@ -1,0 +1,24 @@
+{
+  "version": 5,
+  "configurePresets": [
+    {
+      "name": "mcu-debug",
+      "displayName": "STM32F746 MCU Debug",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/mcu-debug",
+      "toolchainFile": "${sourceDir}/cmake/toolchains/arm-gcc.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      },
+      "environment": {
+        "PATH": "$penv{PATH};C:\\Program Files (x86)\\Arm GNU Toolchain arm-none-eabi\\14.2 rel1\\bin;C:\\msys64\\mingw64\\bin"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "build-mcu-debug",
+      "configurePreset": "mcu-debug"
+    }
+  ]
+}
