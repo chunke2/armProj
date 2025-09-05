@@ -12,7 +12,7 @@ set(CMAKE_C_STANDARD 11)
 set(PROJ_ROOT ${CMAKE_SOURCE_DIR})
 set(DRIVERS   ${PROJ_ROOT}/Drivers)
 set(MCU_ROOT  ${PROJ_ROOT}/mcu)
-set(MCU_INC   ${MCU_ROOT}/inc)
+set(MCU_INC   ${MCU_ROOT}/Inc)
 set(MCU_SRC   ${MCU_ROOT}/src)
 set(MCU_SYS   ${MCU_ROOT}/system)
 set(MCU_STUP  ${MCU_ROOT}/startup)
@@ -180,67 +180,96 @@ if(EXISTS "${USBH_DIR}" AND EXISTS "${USBH_APP}")
   endforeach()
 endif()
 
-# ===== 生成 MCU 可执行文件 =====
-add_executable(app.elf
-  ${MCU_SRCS}
-  ${FREERTOS_SRC}
-  ${FATFS_SRC}
-  ${USBH_SRC}
-  ${STARTUP_S}
-)
+# ===== 交叉编译时的目标选择 =====
+if(CMAKE_CROSSCOMPILING)
+  # 当 CMAKE_TRY_COMPILE_TARGET_TYPE 设为 STATIC_LIBRARY 时，创建静态库（用于 CI 验证）
+  if(CMAKE_TRY_COMPILE_TARGET_TYPE STREQUAL "STATIC_LIBRARY")
+    # 创建静态库，仅包含核心源码（去除启动文件和链接器依赖）
+    add_library(armlib STATIC
+      ${HAL_SRCS}
+      ${MCU_SYS}/system_stm32f7xx.c
+      # 只包含可编译的 C 源码，去除 main.c 和启动文件
+    )
+    target_compile_definitions(armlib PRIVATE USE_HAL_DRIVER STM32F746xx)
+    target_compile_options(armlib PRIVATE
+      -mcpu=cortex-m7
+      -mthumb
+      -mfloat-abi=hard
+      -mfpu=fpv5-sp-d16
+      -ffunction-sections -fdata-sections -Wall -Wextra
+    )
+    # 确保 armlib 也能找到头文件
+    target_include_directories(armlib PRIVATE
+      ${DRIVERS}/CMSIS/Include
+      ${DRIVERS}/CMSIS/Device/ST/STM32F7xx/Include
+      ${DRIVERS}/STM32F7xx_HAL_Driver/Inc
+      ${MCU_INC}
+    )
+    message(STATUS "Building ARM static library for CI")
+  else()
+    # 创建完整的可执行文件
+    add_executable(app.elf
+      ${MCU_SRCS}
+      ${FREERTOS_SRC}
+      ${FATFS_SRC}
+      ${USBH_SRC}
+      ${STARTUP_S}
+    )
 
-# 设备/HAL 宏（必要）
-target_compile_definitions(app.elf PRIVATE USE_HAL_DRIVER STM32F746xx)
+    # 设备/HAL 宏（必要）
+    target_compile_definitions(app.elf PRIVATE USE_HAL_DRIVER STM32F746xx)
 
-# 自动把 syscalls.c/sysmem.c/retarget.c 并入（若存在）
-foreach(_f IN ITEMS syscalls.c sysmem.c retarget.c)
-  if(EXISTS "${MCU_SRC}/${_f}")
-    target_sources(app.elf PRIVATE ${MCU_SRC}/${_f})
+    # 自动把 syscalls.c/sysmem.c/retarget.c 并入（若存在）
+    foreach(_f IN ITEMS syscalls.c sysmem.c retarget.c)
+      if(EXISTS "${MCU_SRC}/${_f}")
+        target_sources(app.elf PRIVATE ${MCU_SRC}/${_f})
+      endif()
+    endforeach()
+
+    # CPU/FPU/Thumb 选项（注意分成多个参数）
+    target_compile_options(app.elf PRIVATE
+      -mcpu=cortex-m7
+      -mthumb
+      -mfloat-abi=hard
+      -mfpu=fpv5-sp-d16
+      -ffunction-sections -fdata-sections -Wall -Wextra
+    )
+
+    target_link_options(app.elf PRIVATE
+      -mcpu=cortex-m7
+      -mthumb
+      -mfloat-abi=hard
+      -mfpu=fpv5-sp-d16
+      --specs=nano.specs
+      --specs=nosys.specs
+      -Wl,--gc-sections
+      -Wl,--print-memory-usage
+      -Wl,-Map=app.map
+    )
+
+    # 链接脚本
+    set(LD_SCRIPT ${MCU_LD}/STM32F746XX_FLASH.ld)
+    if(NOT EXISTS "${LD_SCRIPT}")
+      message(FATAL_ERROR "Linker script not found at: ${LD_SCRIPT}")
+    endif()
+    target_link_options(app.elf PRIVATE -T${LD_SCRIPT})
+
+    # 链接数学库
+    target_link_libraries(app.elf PRIVATE m)
+
+    # 找 objcopy/objdump（用于生成 hex/bin/list）
+    find_program(CMAKE_OBJCOPY arm-none-eabi-objcopy)
+    find_program(CMAKE_OBJDUMP arm-none-eabi-objdump)
+
+    # 产物
+    add_custom_command(TARGET app.elf POST_BUILD
+      COMMAND ${CMAKE_OBJDUMP} -h -S app.elf > app.list
+      COMMAND ${CMAKE_OBJCOPY} -O ihex app.elf app.hex
+      COMMAND ${CMAKE_OBJCOPY} -O binary app.elf app.bin
+      COMMENT "Generating list/hex/bin"
+    )
   endif()
-endforeach()
-
-# CPU/FPU/Thumb 选项（注意分成多个参数）
-target_compile_options(app.elf PRIVATE
-  -mcpu=cortex-m7
-  -mthumb
-  -mfloat-abi=hard
-  -mfpu=fpv5-sp-d16
-  -ffunction-sections -fdata-sections -Wall -Wextra
-)
-
-target_link_options(app.elf PRIVATE
-  -mcpu=cortex-m7
-  -mthumb
-  -mfloat-abi=hard
-  -mfpu=fpv5-sp-d16
-  --specs=nano.specs
-  --specs=nosys.specs
-  -Wl,--gc-sections
-  -Wl,--print-memory-usage
-  -Wl,-Map=app.map
-)
-
-# 链接脚本
-set(LD_SCRIPT ${MCU_LD}/STM32F746XX_FLASH.ld)
-if(NOT EXISTS "${LD_SCRIPT}")
-  message(FATAL_ERROR "Linker script not found at: ${LD_SCRIPT}")
 endif()
-target_link_options(app.elf PRIVATE -T${LD_SCRIPT})
-
-# 链接数学库
-target_link_libraries(app.elf PRIVATE m)
-
-# 找 objcopy/objdump（用于生成 hex/bin/list）
-find_program(CMAKE_OBJCOPY arm-none-eabi-objcopy)
-find_program(CMAKE_OBJDUMP arm-none-eabi-objdump)
-
-# 产物
-add_custom_command(TARGET app.elf POST_BUILD
-  COMMAND ${CMAKE_OBJDUMP} -h -S app.elf > app.list
-  COMMAND ${CMAKE_OBJCOPY} -O ihex app.elf app.hex
-  COMMAND ${CMAKE_OBJCOPY} -O binary app.elf app.bin
-  COMMENT "Generating list/hex/bin"
-)
 
 # =====（可选）Host 侧小测试：仅在非交叉编译时构建 =====
 if(NOT CMAKE_CROSSCOMPILING AND EXISTS "${CMAKE_SOURCE_DIR}/tests/main.c")
