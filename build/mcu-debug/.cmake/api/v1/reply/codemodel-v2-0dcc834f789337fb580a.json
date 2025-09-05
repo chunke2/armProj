@@ -15,8 +15,7 @@
 					"source" : ".",
 					"targetIndexes" : 
 					[
-						0,
-						1
+						0
 					]
 				}
 			],
@@ -31,8 +30,7 @@
 					"name" : "stm32_proj",
 					"targetIndexes" : 
 					[
-						0,
-						1
+						0
 					]
 				}
 			],
@@ -41,15 +39,8 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "app.elf::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-app.elf-Debug-68660327561957859c49.json",
+					"jsonFile" : "target-app.elf-Debug-25a5e92e0ae4939c2d66.json",
 					"name" : "app.elf",
-					"projectIndex" : 0
-				},
-				{
-					"directoryIndex" : 0,
-					"id" : "stm32_proj::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-stm32_proj-Debug-dc0ca53f3a2fc423ac57.json",
-					"name" : "stm32_proj",
 					"projectIndex" : 0
 				}
 			]
