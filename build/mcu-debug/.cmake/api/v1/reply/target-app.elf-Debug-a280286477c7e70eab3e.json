@@ -12,10 +12,10 @@
 		[
 			"add_executable",
 			"target_link_options",
+			"target_link_libraries",
 			"target_compile_options",
 			"target_compile_definitions",
-			"include_directories",
-			"target_sources"
+			"include_directories"
 		],
 		"files" : 
 		[
@@ -29,79 +29,79 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 76,
+				"line" : 184,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 182,
+				"line" : 211,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 200,
+				"line" : 228,
 				"parent" : 0
 			},
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 174,
+				"line" : 231,
 				"parent" : 0
 			},
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 83,
+				"line" : 203,
 				"parent" : 0
 			},
 			{
 				"command" : 4,
 				"file" : 0,
-				"line" : 19,
-				"parent" : 0
-			},
-			{
-				"command" : 4,
-				"file" : 0,
-				"line" : 28,
-				"parent" : 0
-			},
-			{
-				"command" : 4,
-				"file" : 0,
-				"line" : 94,
-				"parent" : 0
-			},
-			{
-				"command" : 4,
-				"file" : 0,
-				"line" : 137,
-				"parent" : 0
-			},
-			{
-				"command" : 4,
-				"file" : 0,
-				"line" : 142,
-				"parent" : 0
-			},
-			{
-				"command" : 4,
-				"file" : 0,
-				"line" : 146,
+				"line" : 193,
 				"parent" : 0
 			},
 			{
 				"command" : 5,
 				"file" : 0,
-				"line" : 125,
+				"line" : 22,
 				"parent" : 0
 			},
 			{
 				"command" : 5,
 				"file" : 0,
-				"line" : 169,
+				"line" : 31,
+				"parent" : 0
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 74,
+				"parent" : 0
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 80,
+				"parent" : 0
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 119,
+				"parent" : 0
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 156,
+				"parent" : 0
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 159,
 				"parent" : 0
 			}
 		]
@@ -115,106 +115,114 @@
 					"fragment" : "-g -std=gnu11"
 				},
 				{
-					"backtrace" : 4,
+					"backtrace" : 5,
 					"fragment" : "-mcpu=cortex-m7"
 				},
 				{
-					"backtrace" : 4,
+					"backtrace" : 5,
 					"fragment" : "-mthumb"
 				},
 				{
-					"backtrace" : 4,
+					"backtrace" : 5,
 					"fragment" : "-mfloat-abi=hard"
 				},
 				{
-					"backtrace" : 4,
+					"backtrace" : 5,
 					"fragment" : "-mfpu=fpv5-sp-d16"
 				},
 				{
-					"backtrace" : 4,
+					"backtrace" : 5,
 					"fragment" : "-ffunction-sections"
 				},
 				{
-					"backtrace" : 4,
+					"backtrace" : 5,
 					"fragment" : "-fdata-sections"
 				},
 				{
-					"backtrace" : 4,
+					"backtrace" : 5,
 					"fragment" : "-Wall"
 				},
 				{
-					"backtrace" : 4,
+					"backtrace" : 5,
 					"fragment" : "-Wextra"
 				}
 			],
 			"defines" : 
 			[
 				{
-					"backtrace" : 5,
+					"backtrace" : 6,
 					"define" : "STM32F746xx"
 				},
 				{
-					"backtrace" : 5,
+					"backtrace" : 6,
 					"define" : "USE_HAL_DRIVER"
 				}
 			],
 			"includes" : 
 			[
 				{
-					"backtrace" : 6,
+					"backtrace" : 7,
 					"path" : "D:/dev/stm32/projects/armProj/Drivers/CMSIS/Include"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 7,
 					"path" : "D:/dev/stm32/projects/armProj/Drivers/CMSIS/Device/ST/STM32F7xx/Include"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 7,
 					"path" : "D:/dev/stm32/projects/armProj/Drivers/STM32F7xx_HAL_Driver/Inc"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 7,
 					"path" : "D:/dev/stm32/projects/armProj/mcu/inc"
 				},
 				{
-					"backtrace" : 7,
+					"backtrace" : 8,
 					"path" : "D:/dev/stm32/projects/armProj/Middlewares/Third_Party/FreeRTOS/Source/include"
 				},
 				{
-					"backtrace" : 7,
+					"backtrace" : 8,
 					"path" : "D:/dev/stm32/projects/armProj/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS"
 				},
 				{
-					"backtrace" : 7,
+					"backtrace" : 8,
 					"path" : "D:/dev/stm32/projects/armProj/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1"
 				},
 				{
-					"backtrace" : 8,
-					"path" : "D:/dev/stm32/projects/armProj/Middlewares/Third_Party/FatFs/src"
-				},
-				{
-					"backtrace" : 8,
-					"path" : "D:/dev/stm32/projects/armProj/FATFS/App"
-				},
-				{
-					"backtrace" : 8,
-					"path" : "D:/dev/stm32/projects/armProj/FATFS/Target"
-				},
-				{
 					"backtrace" : 9,
-					"path" : "D:/dev/stm32/projects/armProj/Middlewares/ST/STM32_USB_Host_Library/Core/Inc"
+					"path" : "D:/dev/stm32/projects/armProj/../../CubeMX files/test1/Core/Inc"
 				},
 				{
 					"backtrace" : 10,
-					"path" : "D:/dev/stm32/projects/armProj/Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Inc"
+					"path" : "D:/dev/stm32/projects/armProj/../../CubeMX files/test1/Drivers/STM32F7xx_HAL_Driver/Inc"
 				},
 				{
 					"backtrace" : 11,
+					"path" : "D:/dev/stm32/projects/armProj/Middlewares/Third_Party/FatFs/src"
+				},
+				{
+					"backtrace" : 11,
+					"path" : "D:/dev/stm32/projects/armProj/FATFS/App"
+				},
+				{
+					"backtrace" : 11,
+					"path" : "D:/dev/stm32/projects/armProj/FATFS/Target"
+				},
+				{
+					"backtrace" : 12,
+					"path" : "D:/dev/stm32/projects/armProj/Middlewares/ST/STM32_USB_Host_Library/Core/Inc"
+				},
+				{
+					"backtrace" : 12,
 					"path" : "D:/dev/stm32/projects/armProj/USB_HOST/App"
 				},
 				{
-					"backtrace" : 11,
+					"backtrace" : 12,
 					"path" : "D:/dev/stm32/projects/armProj/USB_HOST/Target"
+				},
+				{
+					"backtrace" : 13,
+					"path" : "D:/dev/stm32/projects/armProj/Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Inc"
 				}
 			],
 			"language" : "C",
@@ -288,6 +296,7 @@
 				57,
 				58,
 				59,
+				60,
 				61,
 				62,
 				63,
@@ -300,7 +309,28 @@
 				70,
 				71,
 				72,
-				73
+				73,
+				74,
+				75,
+				76,
+				77,
+				78,
+				79,
+				80,
+				81,
+				82,
+				83,
+				84,
+				85,
+				86,
+				87,
+				88,
+				89,
+				90,
+				91,
+				92,
+				93,
+				94
 			]
 		},
 		{
@@ -310,112 +340,120 @@
 					"fragment" : "-g"
 				},
 				{
-					"backtrace" : 4,
+					"backtrace" : 5,
 					"fragment" : "-mcpu=cortex-m7"
 				},
 				{
-					"backtrace" : 4,
+					"backtrace" : 5,
 					"fragment" : "-mthumb"
 				},
 				{
-					"backtrace" : 4,
+					"backtrace" : 5,
 					"fragment" : "-mfloat-abi=hard"
 				},
 				{
-					"backtrace" : 4,
+					"backtrace" : 5,
 					"fragment" : "-mfpu=fpv5-sp-d16"
 				},
 				{
-					"backtrace" : 4,
+					"backtrace" : 5,
 					"fragment" : "-ffunction-sections"
 				},
 				{
-					"backtrace" : 4,
+					"backtrace" : 5,
 					"fragment" : "-fdata-sections"
 				},
 				{
-					"backtrace" : 4,
+					"backtrace" : 5,
 					"fragment" : "-Wall"
 				},
 				{
-					"backtrace" : 4,
+					"backtrace" : 5,
 					"fragment" : "-Wextra"
 				}
 			],
 			"defines" : 
 			[
 				{
-					"backtrace" : 5,
+					"backtrace" : 6,
 					"define" : "STM32F746xx"
 				},
 				{
-					"backtrace" : 5,
+					"backtrace" : 6,
 					"define" : "USE_HAL_DRIVER"
 				}
 			],
 			"includes" : 
 			[
 				{
-					"backtrace" : 6,
+					"backtrace" : 7,
 					"path" : "D:/dev/stm32/projects/armProj/Drivers/CMSIS/Include"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 7,
 					"path" : "D:/dev/stm32/projects/armProj/Drivers/CMSIS/Device/ST/STM32F7xx/Include"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 7,
 					"path" : "D:/dev/stm32/projects/armProj/Drivers/STM32F7xx_HAL_Driver/Inc"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 7,
 					"path" : "D:/dev/stm32/projects/armProj/mcu/inc"
 				},
 				{
-					"backtrace" : 7,
+					"backtrace" : 8,
 					"path" : "D:/dev/stm32/projects/armProj/Middlewares/Third_Party/FreeRTOS/Source/include"
 				},
 				{
-					"backtrace" : 7,
+					"backtrace" : 8,
 					"path" : "D:/dev/stm32/projects/armProj/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS"
 				},
 				{
-					"backtrace" : 7,
+					"backtrace" : 8,
 					"path" : "D:/dev/stm32/projects/armProj/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1"
 				},
 				{
-					"backtrace" : 8,
-					"path" : "D:/dev/stm32/projects/armProj/Middlewares/Third_Party/FatFs/src"
-				},
-				{
-					"backtrace" : 8,
-					"path" : "D:/dev/stm32/projects/armProj/FATFS/App"
-				},
-				{
-					"backtrace" : 8,
-					"path" : "D:/dev/stm32/projects/armProj/FATFS/Target"
-				},
-				{
 					"backtrace" : 9,
-					"path" : "D:/dev/stm32/projects/armProj/Middlewares/ST/STM32_USB_Host_Library/Core/Inc"
+					"path" : "D:/dev/stm32/projects/armProj/../../CubeMX files/test1/Core/Inc"
 				},
 				{
 					"backtrace" : 10,
-					"path" : "D:/dev/stm32/projects/armProj/Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Inc"
+					"path" : "D:/dev/stm32/projects/armProj/../../CubeMX files/test1/Drivers/STM32F7xx_HAL_Driver/Inc"
 				},
 				{
 					"backtrace" : 11,
+					"path" : "D:/dev/stm32/projects/armProj/Middlewares/Third_Party/FatFs/src"
+				},
+				{
+					"backtrace" : 11,
+					"path" : "D:/dev/stm32/projects/armProj/FATFS/App"
+				},
+				{
+					"backtrace" : 11,
+					"path" : "D:/dev/stm32/projects/armProj/FATFS/Target"
+				},
+				{
+					"backtrace" : 12,
+					"path" : "D:/dev/stm32/projects/armProj/Middlewares/ST/STM32_USB_Host_Library/Core/Inc"
+				},
+				{
+					"backtrace" : 12,
 					"path" : "D:/dev/stm32/projects/armProj/USB_HOST/App"
 				},
 				{
-					"backtrace" : 11,
+					"backtrace" : 12,
 					"path" : "D:/dev/stm32/projects/armProj/USB_HOST/Target"
+				},
+				{
+					"backtrace" : 13,
+					"path" : "D:/dev/stm32/projects/armProj/Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Inc"
 				}
 			],
 			"language" : "ASM",
 			"sourceIndexes" : 
 			[
-				60
+				95
 			]
 		}
 	],
@@ -477,6 +515,11 @@
 				"backtrace" : 3,
 				"fragment" : "-TD:/dev/stm32/projects/armProj/mcu/linker/STM32F746XX_FLASH.ld",
 				"role" : "flags"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "-lm",
+				"role" : "libraries"
 			}
 		],
 		"language" : "C"
@@ -554,6 +597,7 @@
 				57,
 				58,
 				59,
+				60,
 				61,
 				62,
 				63,
@@ -566,14 +610,35 @@
 				70,
 				71,
 				72,
-				73
+				73,
+				74,
+				75,
+				76,
+				77,
+				78,
+				79,
+				80,
+				81,
+				82,
+				83,
+				84,
+				85,
+				86,
+				87,
+				88,
+				89,
+				90,
+				91,
+				92,
+				93,
+				94
 			]
 		},
 		{
 			"name" : "",
 			"sourceIndexes" : 
 			[
-				60
+				95
 			]
 		}
 	],
@@ -870,13 +935,133 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "mcu/src/main.c",
+			"path" : "mcu/src/freertos.c",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "mcu/src/stm32f7xx_it.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "mcu/src/main.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/dev/stm32/CubeMX files/test1/Core/Src/adc.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/dev/stm32/CubeMX files/test1/Core/Src/crc.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/dev/stm32/CubeMX files/test1/Core/Src/dcmi.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/dev/stm32/CubeMX files/test1/Core/Src/dma2d.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/dev/stm32/CubeMX files/test1/Core/Src/eth.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/dev/stm32/CubeMX files/test1/Core/Src/fmc.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/dev/stm32/CubeMX files/test1/Core/Src/gpio.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/dev/stm32/CubeMX files/test1/Core/Src/i2c.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/dev/stm32/CubeMX files/test1/Core/Src/ltdc.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/dev/stm32/CubeMX files/test1/Core/Src/quadspi.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/dev/stm32/CubeMX files/test1/Core/Src/rtc.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/dev/stm32/CubeMX files/test1/Core/Src/sai.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/dev/stm32/CubeMX files/test1/Core/Src/sdmmc.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/dev/stm32/CubeMX files/test1/Core/Src/spdifrx.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/dev/stm32/CubeMX files/test1/Core/Src/spi.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/dev/stm32/CubeMX files/test1/Core/Src/stm32f7xx_hal_msp.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/dev/stm32/CubeMX files/test1/Core/Src/stm32f7xx_hal_timebase_tim.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/dev/stm32/CubeMX files/test1/Core/Src/tim.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "D:/dev/stm32/CubeMX files/test1/Core/Src/usart.c",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -936,7 +1121,97 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "mcu/src/freertos.c",
+			"path" : "Middlewares/Third_Party/FatFs/src/ff.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Middlewares/Third_Party/FatFs/src/ff_gen_drv.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Middlewares/Third_Party/FatFs/src/diskio.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Middlewares/Third_Party/FatFs/src/option/syscall.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "FATFS/App/fatfs.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "FATFS/Target/sd_diskio.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "FATFS/Target/bsp_driver_sd.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "FATFS/Target/fatfs_platform.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Src/usbh_cdc.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "USB_HOST/App/usb_host.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "USB_HOST/Target/usbh_conf.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "USB_HOST/Target/usbh_platform.c",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -944,84 +1219,6 @@
 			"compileGroupIndex" : 1,
 			"path" : "mcu/startup/startup_stm32f746xx.s",
 			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 12,
-			"compileGroupIndex" : 0,
-			"path" : "Middlewares/Third_Party/FatFs/src/ff.c",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 12,
-			"compileGroupIndex" : 0,
-			"path" : "Middlewares/Third_Party/FatFs/src/ff_gen_drv.c",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 12,
-			"compileGroupIndex" : 0,
-			"path" : "Middlewares/Third_Party/FatFs/src/diskio.c",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 12,
-			"compileGroupIndex" : 0,
-			"path" : "Middlewares/Third_Party/FatFs/src/option/syscall.c",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 12,
-			"compileGroupIndex" : 0,
-			"path" : "FATFS/App/fatfs.c",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 12,
-			"compileGroupIndex" : 0,
-			"path" : "FATFS/Target/sd_diskio.c",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 13,
-			"compileGroupIndex" : 0,
-			"path" : "Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.c",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 13,
-			"compileGroupIndex" : 0,
-			"path" : "Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.c",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 13,
-			"compileGroupIndex" : 0,
-			"path" : "Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.c",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 13,
-			"compileGroupIndex" : 0,
-			"path" : "Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Src/usbh_cdc.c",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 13,
-			"compileGroupIndex" : 0,
-			"path" : "USB_HOST/App/usb_host.c",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 13,
-			"compileGroupIndex" : 0,
-			"path" : "USB_HOST/Target/usbh_conf.c",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 13,
-			"compileGroupIndex" : 0,
-			"path" : "USB_HOST/Target/usbh_platform.c",
-			"sourceGroupIndex" : 0
 		}
 	],
 	"type" : "EXECUTABLE"
