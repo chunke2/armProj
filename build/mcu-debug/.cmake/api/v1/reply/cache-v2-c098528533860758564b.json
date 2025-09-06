@@ -34,6 +34,22 @@
 			"value" : "C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/14.2 rel1/bin/arm-none-eabi-ar.exe"
 		},
 		{
+			"name" : "CMAKE_ASM_COMPILER",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "UNINITIALIZED",
+			"value" : ""
+		},
+		{
 			"name" : "CMAKE_ASM_COMPILER_AR",
 			"properties" : 
 			[
@@ -252,6 +268,22 @@
 			],
 			"type" : "INTERNAL",
 			"value" : "C:/Program Files/CMake/bin/ctest.exe"
+		},
+		{
+			"name" : "CMAKE_C_COMPILER",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "UNINITIALIZED",
+			"value" : ""
 		},
 		{
 			"name" : "CMAKE_C_COMPILER_AR",
@@ -1191,10 +1223,10 @@
 			[
 				{
 					"name" : "HELPSTRING",
-					"value" : "No help, variable specified on the command line."
+					"value" : "The CMake toolchain file"
 				}
 			],
-			"type" : "UNINITIALIZED",
+			"type" : "FILEPATH",
 			"value" : "D:/dev/stm32/projects/armProj/cmake/toolchains/arm-gcc.cmake"
 		},
 		{
