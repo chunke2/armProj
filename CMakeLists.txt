@@ -56,16 +56,26 @@ if(EXISTS "${CUBEMX_BASE}")
   file(GLOB CUBEMX_CORE_SRCS "${CUBEMX_BASE}/*/Core/Src/*.c")
   if(CUBEMX_CORE_SRCS)
     message(STATUS "Found CubeMX Core/Src files at: ${CUBEMX_BASE}")
-    # Exclude files that we already provide in project (to prevent multiple definitions)
-    list(REMOVE_ITEM CUBEMX_CORE_SRCS
-      "${CUBEMX_BASE}/test1/Core/Src/main.c"
-      "${CUBEMX_BASE}/test1/Core/Src/freertos.c"
-      "${CUBEMX_BASE}/test1/Core/Src/stm32f7xx_it.c"
-      "${CUBEMX_BASE}/test1/Core/Src/system_stm32f7xx.c"
-      "${CUBEMX_BASE}/test1/Core/Src/syscalls.c"
-      "${CUBEMX_BASE}/test1/Core/Src/sysmem.c"
-    )
-    list(APPEND MCU_USER_C_SRCS ${CUBEMX_CORE_SRCS})
+    # Build a set of basenames from the MCU user's sources so we can exclude
+    # any CubeMX-generated core files that would duplicate them.
+    set(_project_basenames)
+    foreach(_src IN LISTS MCU_USER_C_SRCS)
+      get_filename_component(_bn ${_src} NAME)
+      list(APPEND _project_basenames ${_bn})
+    endforeach()
+
+    # Filter CUBEMX_CORE_SRCS: remove any entry whose NAME matches an existing basename
+    set(_filtered_cubemx)
+    foreach(_cfile IN LISTS CUBEMX_CORE_SRCS)
+      get_filename_component(_cname ${_cfile} NAME)
+      list(FIND _project_basenames ${_cname} _found)
+      if(_found EQUAL -1)
+        list(APPEND _filtered_cubemx ${_cfile})
+      else()
+        message(STATUS "Skipping CubeMX file (duplicate): ${_cfile}")
+      endif()
+    endforeach()
+    list(APPEND MCU_USER_C_SRCS ${_filtered_cubemx})
   endif()
 
   # Add CubeMX Core/Inc include directories if present
@@ -181,23 +191,26 @@ if(EXISTS "${USBH_DIR}" AND EXISTS "${USBH_APP}")
 endif()
 
 # ===== 生成 MCU 可执行文件 =====
-add_executable(app.elf
-  ${MCU_SRCS}
-  ${FREERTOS_SRC}
-  ${FATFS_SRC}
-  ${USBH_SRC}
-  ${STARTUP_S}
-)
+# Only create the MCU executable when cross-compiling or using arm-none-eabi
+if(CMAKE_CROSSCOMPILING OR CMAKE_C_COMPILER MATCHES ".*arm-none-eabi.*")
+  add_executable(app.elf
+    ${MCU_SRCS}
+    ${FREERTOS_SRC}
+    ${FATFS_SRC}
+    ${USBH_SRC}
+    ${STARTUP_S}
+  )
 
-# 设备/HAL 宏（必要）
-target_compile_definitions(app.elf PRIVATE USE_HAL_DRIVER STM32F746xx)
+  # 设备/HAL 宏（必要）
+  target_compile_definitions(app.elf PRIVATE USE_HAL_DRIVER STM32F746xx)
 
-# 自动把 syscalls.c/sysmem.c/retarget.c 并入（若存在）
-foreach(_f IN ITEMS syscalls.c sysmem.c retarget.c)
-  if(EXISTS "${MCU_SRC}/${_f}")
-    target_sources(app.elf PRIVATE ${MCU_SRC}/${_f})
-  endif()
-endforeach()
+  # 自动把 syscalls.c/sysmem.c/retarget.c 并入（若存在）
+  foreach(_f IN ITEMS syscalls.c sysmem.c retarget.c)
+    if(EXISTS "${MCU_SRC}/${_f}")
+      target_sources(app.elf PRIVATE ${MCU_SRC}/${_f})
+    endif()
+  endforeach()
+endif()
 
 # CPU/FPU/Thumb 选项（注意分成多个参数）
 ## Only add ARM cross-compilation flags and link options when cross-compiling
@@ -236,16 +249,19 @@ else()
 endif()
 
 # 找 objcopy/objdump（用于生成 hex/bin/list）
-find_program(CMAKE_OBJCOPY arm-none-eabi-objcopy)
-find_program(CMAKE_OBJDUMP arm-none-eabi-objdump)
+if(CMAKE_CROSSCOMPILING OR CMAKE_C_COMPILER MATCHES ".*arm-none-eabi.*")
+  # 找 objcopy/objdump（用于生成 hex/bin/list）
+  find_program(CMAKE_OBJCOPY arm-none-eabi-objcopy)
+  find_program(CMAKE_OBJDUMP arm-none-eabi-objdump)
 
-# 产物
-add_custom_command(TARGET app.elf POST_BUILD
-  COMMAND ${CMAKE_OBJDUMP} -h -S app.elf > app.list
-  COMMAND ${CMAKE_OBJCOPY} -O ihex app.elf app.hex
-  COMMAND ${CMAKE_OBJCOPY} -O binary app.elf app.bin
-  COMMENT "Generating list/hex/bin"
-)
+  # 产物
+  add_custom_command(TARGET app.elf POST_BUILD
+    COMMAND ${CMAKE_OBJDUMP} -h -S app.elf > app.list
+    COMMAND ${CMAKE_OBJCOPY} -O ihex app.elf app.hex
+    COMMAND ${CMAKE_OBJCOPY} -O binary app.elf app.bin
+    COMMENT "Generating list/hex/bin"
+  )
+endif()
 
 # =====（可选）Host 侧小测试：仅在非交叉编译时构建 =====
 if(NOT CMAKE_CROSSCOMPILING AND EXISTS "${CMAKE_SOURCE_DIR}/tests/main.c")

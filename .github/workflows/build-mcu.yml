@@ -1,0 +1,37 @@
+name: Build MCU (arm-none-eabi)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-mcu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc-arm-none-eabi binutils-arm-none-eabi build-essential
+
+      - name: Configure CMake
+        run: |
+          mkdir -p build/mcu-debug
+          cmake -S . -B build/mcu-debug -G Ninja -DCMAKE_C_COMPILER=$(which arm-none-eabi-gcc)
+
+      - name: Build
+        run: cmake --build build/mcu-debug -- -j$(nproc)
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: firmware
+          path: |
+            build/mcu-debug/app.elf
+            build/mcu-debug/app.hex
+            build/mcu-debug/app.bin
+            build/mcu-debug/app.list
+            build/mcu-debug/app.map
