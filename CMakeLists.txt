@@ -200,35 +200,40 @@ foreach(_f IN ITEMS syscalls.c sysmem.c retarget.c)
 endforeach()
 
 # CPU/FPU/Thumb 选项（注意分成多个参数）
-target_compile_options(app.elf PRIVATE
-  -mcpu=cortex-m7
-  -mthumb
-  -mfloat-abi=hard
-  -mfpu=fpv5-sp-d16
-  -ffunction-sections -fdata-sections -Wall -Wextra
-)
+## Only add ARM cross-compilation flags and link options when cross-compiling
+if(CMAKE_CROSSCOMPILING OR CMAKE_C_COMPILER MATCHES ".*arm-none-eabi.*")
+  target_compile_options(app.elf PRIVATE
+    -mcpu=cortex-m7
+    -mthumb
+    -mfloat-abi=hard
+    -mfpu=fpv5-sp-d16
+    -ffunction-sections -fdata-sections -Wall -Wextra
+  )
 
-target_link_options(app.elf PRIVATE
-  -mcpu=cortex-m7
-  -mthumb
-  -mfloat-abi=hard
-  -mfpu=fpv5-sp-d16
-  --specs=nano.specs
-  --specs=nosys.specs
-  -Wl,--gc-sections
-  -Wl,--print-memory-usage
-  -Wl,-Map=app.map
-)
+  target_link_options(app.elf PRIVATE
+    -mcpu=cortex-m7
+    -mthumb
+    -mfloat-abi=hard
+    -mfpu=fpv5-sp-d16
+    --specs=nano.specs
+    --specs=nosys.specs
+    -Wl,--gc-sections
+    -Wl,--print-memory-usage
+    -Wl,-Map=app.map
+  )
 
-# 链接脚本
-set(LD_SCRIPT ${MCU_LD}/STM32F746XX_FLASH.ld)
-if(NOT EXISTS "${LD_SCRIPT}")
-  message(FATAL_ERROR "Linker script not found at: ${LD_SCRIPT}")
+  # 链接脚本
+  set(LD_SCRIPT ${MCU_LD}/STM32F746XX_FLASH.ld)
+  if(NOT EXISTS "${LD_SCRIPT}")
+    message(FATAL_ERROR "Linker script not found at: ${LD_SCRIPT}")
+  endif()
+  target_link_options(app.elf PRIVATE -T${LD_SCRIPT})
+
+  # 链接数学库
+  target_link_libraries(app.elf PRIVATE m)
+else()
+  message(STATUS "Native build detected: skipping ARM-specific compile/link flags")
 endif()
-target_link_options(app.elf PRIVATE -T${LD_SCRIPT})
-
-# 链接数学库
-target_link_libraries(app.elf PRIVATE m)
 
 # 找 objcopy/objdump（用于生成 hex/bin/list）
 find_program(CMAKE_OBJCOPY arm-none-eabi-objcopy)
